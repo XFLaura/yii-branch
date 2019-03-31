@@ -3,11 +3,12 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
+
 $config = [
     'id' => 'basic',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'aliases' => [
+    'basePath' => dirname(__DIR__),//系统派生其他的路径 ：@app/runtime 代码runtime 路径
+    'bootstrap' => ['log'],//@todo
+    'aliases' => [//数组的key为别名名称，值为对应的路径
        // '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@bower' => '@vendor/yidas/yii2-bower-asset/bower'
@@ -53,7 +54,29 @@ $config = [
             ],
         ],
         */
+        'search' => function () {
+            $solr = new app\components\SolrService('127.0.0.1');
+            // ... other initializations ...
+            return $solr;
+        },
     ],
+
+    'controllerMap' => [//修改路由映射
+            'article' => [
+                'class' => 'app\controllers\SiteController',
+                'enableCsrfValidation' => false,
+            ],
+        ],
+    /**
+     * 全网维护
+     */
+    /**
+    'catchAll' => [
+            'site/error',
+
+        ],
+
+     */
     'params' => $params,
 ];
 
