@@ -38,7 +38,7 @@ class Country extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels()//方法明确指定属性标签
     {
         return [
             'code' => 'Code',

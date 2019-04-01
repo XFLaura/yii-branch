@@ -6,6 +6,7 @@
  */
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\components\HelloWidget;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CountrySearch */
@@ -14,6 +15,9 @@ use yii\grid\GridView;
 $this->title = 'Countries';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
+<?= HelloWidget::widget(['message' => 'Good morning']) ?>
 <div class="country-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -37,6 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+
 
 
 </div>
