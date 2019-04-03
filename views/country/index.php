@@ -7,6 +7,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\components\HelloWidget;
+use yii\helpers\Url;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CountrySearch */
@@ -41,6 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+    <?=
+    $url = Url::to(['post/view', 'id' => 100]);
+
+    ?>
 
 
 

@@ -41,19 +41,22 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning','info','trace'],
                 ],
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+//                '<controller:[\w-]+>s' => '<controller>/index',
+//                '<controller:[\w-]+>/<id:\d+>'=> '<controller>/view',
+
             ],
         ],
-        */
+
         'search' => function () {
             $solr = new app\components\SolrService('127.0.0.1');
             // ... other initializations ...
