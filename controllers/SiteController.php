@@ -125,7 +125,7 @@ class SiteController extends Controller//控制器
 
     /**
      * Displays about page.
-     *
+     * @name 获取注册验证码
      * @return string
      */
     public function actionAbout()
@@ -139,7 +139,15 @@ class SiteController extends Controller//控制器
     }
 
 
-    public function actionEntry()
+    /**
+     * 注册步骤一：手机号获取验证码
+     * @name 获取注册验证码
+     * @uses 用户注册是拉取验证码
+     * @method post
+     * @param string $phone 手机号
+     * @author echoding
+     */
+    public function actionEntry( )
     {
         $model = new EntryForm();
 
