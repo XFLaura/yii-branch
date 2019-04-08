@@ -19,6 +19,20 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
+<?php
+header('X-XSS-Protection: 0');
+$searchQuery = $_GET['q'];
+/* some search magic here */
+?>
+<!--<h1>You searched for: --><?php //echo $searchQuery; ?><!--</h1>-->
+
+<!--header('X-XSS-Protection: 0');情况下-->
+<!--<h1>You searched for after sercurity: --><?php //echo htmlentities($searchQuery, ENT_QUOTES) ?><!--</h1>-->
+
+<a href="<?php $searchQuery?>">Visit Users homepage</a>
+
+<?php echo $searchQuery?>
+
 <?= HelloWidget::widget(['message' => 'Good morning']) ?>
 <div class="country-index">
 
