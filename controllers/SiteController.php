@@ -10,8 +10,9 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
+use yii\web\NotFoundHttpException;
 
-class SiteController extends Controller//¿ØÖÆÆ÷
+class SiteController extends Controller//æŽ§åˆ¶å™¨
 {
     /**
      * {@inheritdoc}
@@ -60,9 +61,11 @@ class SiteController extends Controller//¿ØÖÆÆ÷
      *
      * @return string
      */
-    public function actionIndex()//²Ù×÷
+    public function actionIndex()//æ“ä½œ
     {
-        return $this->render('index');
+        throw new NotFoundHttpException();
+
+        //return $this->render('index');
     }
 
     /**
@@ -125,7 +128,7 @@ class SiteController extends Controller//¿ØÖÆÆ÷
 
     /**
      * Displays about page.
-     * @name »ñÈ¡×¢²áÑéÖ¤Âë
+     * @name èŽ·å–æ³¨å†ŒéªŒè¯ç 
      * @return string
      */
     public function actionAbout()
@@ -140,11 +143,11 @@ class SiteController extends Controller//¿ØÖÆÆ÷
 
 
     /**
-     * ×¢²á²½ÖèÒ»£ºÊÖ»úºÅ»ñÈ¡ÑéÖ¤Âë
-     * @name »ñÈ¡×¢²áÑéÖ¤Âë
-     * @uses ÓÃ»§×¢²áÊÇÀ­È¡ÑéÖ¤Âë
+     * æ³¨å†Œæ­¥éª¤ä¸€ï¼šæ‰‹æœºå·èŽ·å–éªŒè¯ç 
+     * @name èŽ·å–æ³¨å†ŒéªŒè¯ç 
+     * @uses ç”¨æˆ·æ³¨å†Œæ˜¯æ‹‰å–éªŒè¯ç 
      * @method post
-     * @param string $phone ÊÖ»úºÅ
+     * @param string $phone æ‰‹æœºå·
      * @author echoding
      */
     public function actionEntry( )
@@ -152,14 +155,22 @@ class SiteController extends Controller//¿ØÖÆÆ÷
         $model = new EntryForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // ÑéÖ¤ $model ÊÕµ½µÄÊý¾Ý
+            // éªŒè¯ $model æ”¶åˆ°çš„æ•°æ®
 
-            // ×öÐ©ÓÐÒâÒåµÄÊÂ ...
+            // åšäº›æœ‰æ„ä¹‰çš„äº‹ ...
 
             return $this->render('entry-confirm', ['model' => $model]);
         } else {
-            // ÎÞÂÛÊÇ³õÊ¼»¯ÏÔÊ¾»¹ÊÇÊý¾ÝÑéÖ¤´íÎó
+            // æ— è®ºæ˜¯åˆå§‹åŒ–æ˜¾ç¤ºè¿˜æ˜¯æ•°æ®éªŒè¯é”™è¯¯
             return $this->render('entry', ['model' => $model]);
+        }
+    }
+
+    public function actionError()
+    {
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            return $this->render('error', ['exception' => $exception]);
         }
     }
 }

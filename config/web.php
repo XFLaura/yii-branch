@@ -18,7 +18,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'test',//信息： cookieValidationKey 对你的应用安全很重要， 应只被你信任的人知晓，请不要将它放入版本控制中。
-            
+
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -28,6 +28,8 @@ $config = [
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
+            'maxSourceLines' => 10,
+
             'errorAction' => 'site/error',
         ],
         'mailer' => [
@@ -35,8 +37,21 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => true,//false发送邮件，true只是生成邮件在runtime文件夹下，不发邮件
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.163.com',  //每种邮箱的host配置不一样
+                'username' => 'xifei24@163.com',
+                'password' => '005311Xf!!',
+                'port' => '25',
+                'encryption' => 'tls',
+            ],
+            'messageConfig'=>[
+                'charset'=>'UTF-8',
+                'from'=>['xifei24@163.com'=>'admin']
+            ],
         ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -44,6 +59,23 @@ $config = [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning','info','trace'],
                 ],
+                /**
+                 * 邮件发送错误日志
+                 */
+               /**
+                [
+                    'class' => 'yii\log\EmailTarget',
+                    'mailer' => 'mailer',
+                    'levels' => ['error'],
+                   // 'categories' => ['yii\db\*'],
+                    'message' => [
+                        'from' => ['xifei24@163.com'],
+                        'to' => ['xifei24@163.com'],
+                        'subject' => 'Database errors at example.com',
+                    ],
+                ],
+                */
+
             ],
         ],
         'db' => $db,

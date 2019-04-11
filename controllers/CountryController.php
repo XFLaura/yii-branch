@@ -163,6 +163,9 @@ class CountryController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * session
+     */
     public function actionSession(){
         $session = Yii::$app->session;
 
@@ -213,6 +216,36 @@ class CountryController extends Controller
         $session->addFlash('alerts', 'You are promoted.');
         $alerts = $session->getFlash('alerts');
 var_dump($alerts);exit;
+        var_dump($alerts);exit;
 
     }
+
+    /**
+     * log
+     */
+    public function actionLog(){
+        Yii::trace('start calculating average revenue');
+
+
+    }
+
+    /**
+     * 发送邮件
+     * 密码重置
+     */
+    public function actionMail(){
+        $mail= Yii::$app->mailer->compose('/country/reback',['username'=>'test','time'=>time(),'token'=>'1']);
+        $mail->setTo('xifei24@163.com');
+        $mail->setSubject("邮件测试");
+        //$mail->setHtmlBody("<br>问我我我我我");    //发布可以带html标签的文本
+        $mail->setSubject("找回密码");//邮件主题标题
+        if($mail->send())
+            echo "success";
+        else
+            echo "failse";
+        die();
+    }
+
+
+
 }

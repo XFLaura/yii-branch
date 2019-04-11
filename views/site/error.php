@@ -2,6 +2,8 @@
 /**
  * User: xifei
  * Date: 2019/3/31
- * Time: обнГ9:50
+ * Time: О©╫О©╫О©╫О©╫9:50
  */
-echo 1;
+echo "ERROR_PAGE:";
+echo "<br />";
+echo $exception;
