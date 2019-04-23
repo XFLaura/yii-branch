@@ -8,6 +8,9 @@ use app\models\CountrySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use app\components\MyClass;
+use app\components\Foo;
 
 /**
  * CountryController implements the CRUD actions for Country model.
@@ -244,6 +247,92 @@ var_dump($alerts);exit;
         else
             echo "failse";
         die();
+    }
+
+    /**
+     * 性能
+     */
+    public function actionProfile(){
+        \Yii::warning('myBenchmark');
+//        for($i = 1;$i<10;$i++){
+//            echo $i;
+//            sleep(2);
+//        }
+        $_POST='test';
+        $context = ArrayHelper::filter($GLOBALS,['_GET']);
+        var_dump($context);exit;
+        $this->test('test');
+//        \Yii::endProfile('myBenchmark');
+
+    }
+    function test($test){
+        $this->test1($test);
+    }
+    function test1($test){
+        return $test;
+    }
+
+    /**
+     * yii ArrayHelper filter
+     */
+    public function actionFilter(){
+        $array = [
+            'A' => [1, 2],
+            'B' => [
+                'C' => 1,
+                'D' => 2,
+            ],
+            'E' => 1,
+        ];
+        $result = \yii\helpers\ArrayHelper::filter($array,  ['A', 'B.C']);
+        var_dump($result);exit;
+
+    }
+
+    public function actionComp()//路由区分大小写？
+    {
+        $components = new MyClass(1,2,['prob1' => 3, 'prob2' => 4]);
+        $component = \Yii::createObject([
+            'class' => MyClass::className(),
+            'prob1' => 3,
+            'prob2' => 4,
+        ], [1, 2]);
+        echo $component->prob1;
+        echo '</br>';
+        echo $components->prob2;
+    }
+
+    /**
+     *  属性
+     *  这类属性的名字是不区分大小写的。
+     *  $object->label 和 $object->Label 是同一个属性。
+     *  因为 PHP 方法名是不区分大小写的。
+     */
+    public function actionFoo()
+    {
+        $foo_object = new Foo();
+
+        //$foo_object->setLabel('abc');
+        echo $foo_object->canGetProperty('label');
+        echo var_dump(property_exists($foo_object, '_label'));
+        $foo_object->label = 'abc';
+
+        $label = $foo_object->label;
+        echo $label;exit;
+
+    }
+
+    /**
+     * 事件
+     * 
+     */
+    public function actionEvent()
+    {
+        callBack();
+        call_user_func();
+        $foo = new Foo;
+        $foo->on(Foo::EVENT_HELLO, 'function_name');
+
     }
 
 

@@ -14,6 +14,7 @@ $config = [
         '@bower' => '@vendor/yidas/yii2-bower-asset/bower'
 
     ],
+    'timeZone' => 'Asia/Shanghai',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -54,10 +55,15 @@ $config = [
 
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
+            'flushInterval' => 1,//日志立即刷新输出
+
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning','info','trace'],
+                    'exportInterval' => 1000,//
+                    //'enable'=>true,
+                    //'logVars'=>[''],// 不设置具体值默认输出   '_GET','_POST','_FILES','_COOKIE','_SESSION','_SERVER',
+                   // 'levels' => ['error','warning' ],//不指定level 的情况下，输出所有的日志
                 ],
                 /**
                  * 邮件发送错误日志

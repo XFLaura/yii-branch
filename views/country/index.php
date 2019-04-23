@@ -10,6 +10,7 @@ use app\components\HelloWidget;
 use yii\helpers\Url;
 use yii\bootstrap\Alert;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CountrySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -17,11 +18,14 @@ use yii\bootstrap\Alert;
 $this->title = 'Countries';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
 <?=  Alert::widget([
 'options' => ['class' => 'alert-info'],
 'body' => $session_body,
 ]);
 ?>
+
 <?= HelloWidget::widget(['message' => 'Good morning']) ?>
 <div class="country-index">
 
