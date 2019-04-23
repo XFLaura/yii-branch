@@ -326,13 +326,50 @@ var_dump($alerts);exit;
      * 事件
      * 
      */
-    public function actionEvent()
-    {
-        callBack();
-        call_user_func();
-        $foo = new Foo;
-        $foo->on(Foo::EVENT_HELLO, 'function_name');
+//    public function actionEvent()
+//    {
+//        $foo = new Foo;
+//        // 处理器是全局函数
+//        $foo->on(Foo::EVENT_HELLO, 'function_name');
+//        // 处理器是对象方法
+//        $foo->on(Foo::EVENT_HELLO, [$object, 'methodName']);
+//        // 处理器是静态类方法
+//        $foo->on(Foo::EVENT_HELLO, ['app\components\Bar', 'methodName']);
+//        // 处理器是匿名函数
+//        $foo->on(Foo::EVENT_HELLO, function ($event) {//事件处理逻辑
+//            $event->handled = true;
+//
+//        }
+//
+//        $foo->on(Foo::EVENT_HELLO, function ($event) {
+//            // 这个处理器将被插入到处理器队列的第一位...
+//        }, $data, false);
+//
+//
+//        // 处理器是全局函数
+//        $foo->off(Foo::EVENT_HELLO, 'function_name');
+//
+//        // 处理器是对象方法
+//        $foo->off(Foo::EVENT_HELLO, [$object, 'methodName']);
+//
+//        // 处理器是静态类方法
+//        $foo->off(Foo::EVENT_HELLO, ['app\components\Bar', 'methodName']);
+//
+//        // 处理器是匿名函数
+//        $foo->off(Foo::EVENT_HELLO, $anonymousFunction);
+//
+//    }
 
+    /**
+     * 模块化调用
+     */
+    public function actionModule()
+    {
+        //获取子模块
+        $article = \YII::$app->getModule('article');
+
+        //调用子模块的操作
+        $article->runAction('default/index');
     }
 
 

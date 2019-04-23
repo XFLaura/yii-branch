@@ -15,6 +15,12 @@ $config = [
 
     ],
     'timeZone' => 'Asia/Shanghai',
+    'modules' => [
+        'article' => [
+            'class' => 'app\modules\article\Article',
+        ],
+    ],
+
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -86,15 +92,15 @@ $config = [
         ],
         'db' => $db,
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-//                '<controller:[\w-]+>s' => '<controller>/index',
-//                '<controller:[\w-]+>/<id:\d+>'=> '<controller>/view',
-
-            ],
-        ],
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'rules' => [
+////                '<controller:[\w-]+>s' => '<controller>/index',
+////                '<controller:[\w-]+>/<id:\d+>'=> '<controller>/view',
+//
+//            ],
+//        ],
 
         'search' => function () {
             $solr = new app\components\SolrService('127.0.0.1');
@@ -104,7 +110,7 @@ $config = [
     ],
 
     'controllerMap' => [//修改路由映射
-            'article' => [
+            'article1' => [
                 'class' => 'app\controllers\SiteController',
                 'enableCsrfValidation' => false,
             ],
