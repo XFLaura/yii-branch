@@ -326,11 +326,16 @@ var_dump($alerts);exit;
      * 事件
      * 
      */
-//    public function actionEvent()
-//    {
-//        $foo = new Foo;
-//        // 处理器是全局函数
-//        $foo->on(Foo::EVENT_HELLO, 'function_name');
+    public function actionEvent()
+    {
+        $foo = new Foo;
+        // 处理器是全局函数
+        $foo->on(Foo::EVENT_HELLO,['app\components\foo', 'function_name'],'hello',false);
+        $foo->on(Foo::EVENT_HELLO,['app\components\foo', 'function_name1'],'hello1');
+        $foo->on(Foo::EVENT_HELLO,['app\components\foo', 'function_name2'],'hello2');
+
+        $foo->bar();
+
 //        // 处理器是对象方法
 //        $foo->on(Foo::EVENT_HELLO, [$object, 'methodName']);
 //        // 处理器是静态类方法
@@ -357,8 +362,9 @@ var_dump($alerts);exit;
 //
 //        // 处理器是匿名函数
 //        $foo->off(Foo::EVENT_HELLO, $anonymousFunction);
-//
-//    }
+
+    }
+
 
     /**
      * 模块化调用
@@ -367,7 +373,6 @@ var_dump($alerts);exit;
     {
         //获取子模块
         $article = \YII::$app->getModule('article');
-
         //调用子模块的操作
         $article->runAction('default/index');
     }

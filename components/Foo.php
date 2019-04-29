@@ -16,9 +16,27 @@ class Foo extends Component
     function function_name($event) {
         echo $event->data;
     }
+    function function_name1($event) {
+        echo $event->data;
+    }
+    function function_name2($event) {
+        echo $event->data;
+    }
 
     public function bar()
     {
-        $this->trigger(self::EVENT_HELLO);
+
+        echo "cat is coming</br>";
+        $me = new MyEvent;
+        $me->message = "hell my event</br>";
+        $this->trigger(self::EVENT_HELLO,$me);
     }
+
+
 }
+
+class MyEvent extends Event
+{
+    public $message;
+}
+
